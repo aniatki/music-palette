@@ -26,16 +26,10 @@ SECRET_KEY = 'django-insecure-z3_&odf&@fsmh(ze5w%09z%s^u+mx)fqjpm8mr=(x$!^@shtf_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "https://aniatki-musicpalette-lbmgz28jdao.ws-eu90.gitpod.io",
-    "https://8000-aniatki-musicpalette-lbmgz28jdao.ws-eu90.gitpod.io",
-]
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost",
-    "https://aniatki-musicpalette-lbmgz28jdao.ws-eu90.gitpod.io",
-    "https://8000-aniatki-musicpalette-lbmgz28jdao.ws-eu90.gitpod.io",
+    'https://*.gitpod.io', 
 ]
 
 # Application definition
@@ -52,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -103,6 +98,7 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'music_palette.wsgi.application'
 
@@ -152,8 +148,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
