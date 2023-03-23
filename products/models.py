@@ -5,6 +5,9 @@ from django.core.validators import RegexValidator
 
 
 class Artwork(models.Model):
+    """
+    Model for Artwork that will be published from creators
+    """
 
     name = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200)
@@ -35,7 +38,11 @@ class Artwork(models.Model):
         return str(self.name)
 
     def GRid(self):
-        """Unique Identifier for release"""
+        """
+        Stands for Global Release Identifier.
+        This function will compile the 18 alphanumeric string,
+        if the artwork has been used on a release.
+        """
         return self.identifier_scheme_element + '-' + \
             self.issuer_code_element + '-' + \
             self.release_number_element + '-' + \
