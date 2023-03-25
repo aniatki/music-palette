@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import RegexValidator
+# from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -9,8 +9,8 @@ class Creator(models.Model):
     Model for user object
     """
     ACCOUNT_TYPE_CHOICES = [
-        (0, "Art Creator"),
-        (1, "Record Label or Musician"),
+        ("0", "Art Creator"),
+        ("1", "Record Label or Musician"),
     ]
 
     name = models.CharField(
@@ -27,7 +27,7 @@ class Creator(models.Model):
         unique=True,
         blank=False,
         null=False)
-    account_type = models.CharField(max_length=1, choices=ACCOUNT_TYPE_CHOICES)
+    account_type = models.CharField(max_length=24, choices=ACCOUNT_TYPE_CHOICES)
 
 
 class Artwork(models.Model):
@@ -37,16 +37,21 @@ class Artwork(models.Model):
 
     name = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200)
-    image_url = models.URLField()
+    image_url = models.ImageField()
     released = models.BooleanField()
-    GRid = models.CharField(
-        blank=True,
-        max_length=18,
-        validators=[RegexValidator('^[A-Z0-9]*$',
-                    'Only uppercase letters and numbers allowed.')]
-        )
-    date_posted = models.DateField(auto_created=)
-    creator = models.ForeignKey(Creator, on_delete=models.CASCADE, null=True)
+    # GRid = models.CharField(
+    #     blank=True,
+    #     max_length=18,
+    #     validators=[RegexValidator('^[A-Z0-9]*$',
+    #                 'Only uppercase letters and numbers allowed.')]
+    #     )
+    isrc = models.CharField(max_length=12, blank=True)
+    date_posted = models.DateField(auto_now_add=True, null=True)
+    creator = models.ForeignKey(
+        Creator,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
 
     def __str__(self):
         return str(self.name)
