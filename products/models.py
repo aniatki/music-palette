@@ -4,6 +4,32 @@ from django.core.validators import RegexValidator
 # Create your models here.
 
 
+class Creator(models.Model):
+    """
+    Model for user object
+    """
+    ACCOUNT_TYPE_CHOICES = [
+        (0, "Art Creator"),
+        (1, "Record Label or Musician"),
+    ]
+
+    name = models.CharField(
+        max_length=75,
+        blank=False,
+        null=False)
+    username = models.CharField(
+        max_length=50,
+        unique=True,
+        blank=False,
+        null=False)
+    email = models.EmailField(
+        max_length=75,
+        unique=True,
+        blank=False,
+        null=False)
+    account_type = models.CharField(max_length=1, choices=ACCOUNT_TYPE_CHOICES)
+
+
 class Artwork(models.Model):
     """
     Model for Artwork that will be published from creators
@@ -13,37 +39,14 @@ class Artwork(models.Model):
     description = models.CharField(max_length=200)
     image_url = models.URLField()
     released = models.BooleanField()
-    identifier_scheme_element = models.CharField(
-        max_length=2,
+    GRid = models.CharField(
+        blank=True,
+        max_length=18,
         validators=[RegexValidator('^[A-Z0-9]*$',
                     'Only uppercase letters and numbers allowed.')]
         )
-    issuer_code_element = models.CharField(
-        max_length=5,
-        validators=[RegexValidator('^[A-Z0-9]*$',
-                    'Only uppercase letters and numbers allowed.')]
-        )
-    release_number_element = models.CharField(
-        max_length=10,
-        validators=[RegexValidator('^[A-Z0-9]*$',
-                    'Only uppercase letters and numbers allowed.')]
-        )
-    check_character_element = models.CharField(
-        max_length=1,
-        validators=[RegexValidator('^[A-Z0-9]*$',
-                    'Only uppercase letters and numbers allowed.')]
-        )
+    date_posted = models.DateField(auto_created=)
+    creator = models.ForeignKey(Creator, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.name)
-
-    def GRid(self):
-        """
-        Stands for Global Release Identifier.
-        This function will compile the 18 alphanumeric string,
-        if the artwork has been used on a release.
-        """
-        return self.identifier_scheme_element + '-' + \
-            self.issuer_code_element + '-' + \
-            self.release_number_element + '-' + \
-            self.check_character_element
