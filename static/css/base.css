@@ -1,7 +1,91 @@
-html {
-    height: 100%;
-}
-
-body {
-    background: url('/media/8cbfb9cc-bf57-4bbc-8f87-75636291f604.jpg')center center / cover no-repeat;
-}
+.main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: url(../image/background.png) center center / cover no-repeat;
+    place-content: center;
+    padding-block: 5rem;
+  }
+  
+  .hero-content {
+    width: max-content;
+    grid-column: 1/-1;
+    margin-inline: auto;
+    text-align: center;
+  }
+  
+  .card-img-top {
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .card-img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card {
+    border: none;
+    box-shadow: 0 10px 10px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  footer {
+    min-height: 5em;
+    box-shadow: 0 0px 10px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  #singleProduct {
+    min-height: calc(100vh - 340px);
+    background-color: rgba(225, 236, 255, 0.652);
+  }
+  
+  .singleImage {
+    outline: 2px solid rgb(103, 100, 100);
+    outline-offset: 5px;
+  }
+  
+  .contact-card {
+    background-color: rgba(225, 236, 255, 0.652);
+    border: 2px solid rgb(179, 204, 247);
+  }
+  
+  .img img {
+    width: 400px;
+    height: 400px;
+    border: 2px solid rgb(179, 204, 247);
+  }
+  
+  .relative {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .img-1 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  
+  .img-2 {
+    position: absolute;
+    top: 140px;
+    left: 140px;
+  }
+  
+  .img-3 {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+  }
+  
+  .contact-container {
+    min-height: calc(100vh - 340px);
+  }
