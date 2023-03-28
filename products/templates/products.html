@@ -2,27 +2,107 @@
 
 {% block content %}
 
-{% for artwork in artworks %}
+<section>
+    <!-- card section -->
+    <div class="container">
+        <div class="text-center pb-3">
+            <hr>
+            <h2>All our Products!</h2>
+            <hr>
+        </div>
+        <div class="row mt-1 mb-2">
+            <div class="col-12 col-md-6">
+                <p class="text-muted mt-3 text-start">
+                    <!-- Enter current number of products from database -->
+                </p>
+            </div>
+            <div class="col-12 col-md-6 my-auto d-flex justify-content-end">
+                <div class="sort-select-wrapper text-end">
+                    <select id="sort-selector"
+                        class="custom-select custom-select-sm rounded-3 border border-dark px-3 py-1">
+                        <option value="reset" selected>Sort by...
+                        </option>
+                        <option value="price_asc">Price
+                            (low to high)</option>
+                        <option value="price_desc">Price
+                            (high to low)</option>
+                        <option value="category_asc">
+                            Category (A-Z)</option>
+                        <option value="category_desc">Category (Z-A)</option>
+                        <option value="name_asc">Publisher
+                            (A-Z)</option>
+                        <option value="name_desc">Publisher
+                            (Z-A)</option>
+                    </select>
+                </div>
+            </div>
 
-<div class="">
-    <h2>{{ artwork.name }}</h2>
-    <p>{{ artwork.description }}</p>
-    <img src="{{ artwork.image.url }}" alt="{{ artwork.description }}" style="width: 15em">
-    <p>
-        Previously released: 
-        {% if artwork.is_featured %}
-            Yes
-        {% else %}
-            No
-        {% endif%}
-    </p>
-    <p>
-        Posted by: 
-        {{ artwork.creator.name }}
-    </p>
-    <p>Date posted: {{ artwork.date_posted }}</p>
-</div>
+        </div>
 
-{% endfor %}
+        
+        <div class="row">
+            
+            {% for artwork in artworks %}
+
+            <div class=" col-12 col-md-6 col-lg-3 ml-0 mr-auto">
+
+                <div class="card mx-auto mb-4" style="width: 20em">
+                    <img src="{{ artwork.image.url }}" class="card-img" alt="{{ artwork.description }}">
+
+                    <div class="card-body">
+                        <p class="card-text fw-semibold">{{ artwork.name }}
+                            {% if artwork.is_featured %}
+                            <span class="badge bg-secondary ms-3">New</span>
+                            {% endif %}
+                        </p>
+                        
+                        <p>{{ artwork.description }}</p>
+                        
+                        <p class="card-text fs-4 fw-semibold">
+                            {% if not artwork.price %}
+                                Price not available
+                            {% else %}
+                                &#8364;{{ artwork.price }}
+                            {% endif %}
+                        </p>
+                        <div class="row" style="width: 100%">
+                            <span class="text-secondary">
+                                <i class="fa-solid text-secondary fa-tags"></i>
+                                Cover Art
+                            </span>
+
+                            <span>
+                                Posted by:
+                                <strong><a href="{{ artwork.creator.profile_url }}">{{ artwork.creator.name }}</a></strong>
+                            </span>
+
+                            <span>
+                                {% if artwork.released %}
+                                    Release ISRC: <strong>{{ artwork.isrc }}</strong>
+                                    {% else %}
+                                    <a href="#" class="btn btn-primary my-2">
+                                        Buy now
+                                    </a>
+                                {% endif%}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+
+
+        <!-- /card section -->
+    </div>
+</section>
+
+
+
+
+
 
 {% endblock %}
