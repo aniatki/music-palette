@@ -1,7 +1,7 @@
 .main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background: url(../image/background.png) center center / cover no-repeat;
+    background: url(../../media/background.png) center center / cover no-repeat;
     place-content: center;
     padding-block: 5rem;
   }
