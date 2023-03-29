@@ -1,16 +1,16 @@
 .main {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   background: url(../../media/background.png) center center / cover no-repeat;
   place-content: center;
   padding-block: 5rem;
 }
 
 .hero-content {
-  width: max-content;
-  grid-column: 1/-1;
-  margin-inline: auto;
-  text-align: center;
+    width: max-content;
+    grid-column: 1 / -1;
+    margin-inline: auto;
+    text-align: center;
 }
 
 .card-img-top {

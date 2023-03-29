@@ -4,18 +4,23 @@ from .models import Artwork, Creator
 # Create your views here.
 
 
-def artworks_view(request):
+def products_view(request):
     """
     Rendering all products
     """
     artworks = Artwork.objects.all()
     creators = Creator.objects.all()
-    return render(request, 'products.html', {
+    context = {
         'artworks': artworks,
         'creators': creators
-        })
+    }
+    return render(request, 'products.html', context)
 
 
-def artwork_view(request, artwork_id):
+def product_view(request, artwork_id):
+    """
+    Rendering a single product
+    """
     artwork = get_object_or_404(Artwork, pk=artwork_id)
-    return render(request, 'artwork.html', {'artwork': artwork})
+    context = {'artwork': artwork}
+    return render(request, 'product.html', context)
