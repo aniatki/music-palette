@@ -57,7 +57,7 @@
             </div>
             <!-- search form -->
             <div class="col-12 col-lg-4 py-1 py-lg-0">
-                <form method="GET" action="/allproducts/">
+                <form method="GET" action="{% url 'products' %}">
                     <div class="input-group w-100">
                         <input class="form-control border border-dark rounded-5" type="text" name="q"
                             placeholder="Search products" aria-label="Search" />
@@ -130,8 +130,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-                            <form class="form" method="GET" action="">
-                                {% csrf_token %}
+                            <form class="form" method="GET" action="{% url 'products' %}">
                                 <div class="input-group w-100">
                                     <input class="form-control border border-dark rounded-5" type="text" name="q"
                                         placeholder="Search our site" aria-label="Search" />
