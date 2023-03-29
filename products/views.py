@@ -11,9 +11,14 @@ def products_view(request):
     Rendering all products
     """
     artworks = Artwork.objects.all()
-    creators = Creator.objects.all()
     query = None
+    released = None
+    
     if request.GET:
+        if 'released' in request.GET:
+            released = request.GET['released']
+            artworks = artworks.filter(released=released)
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -24,8 +29,7 @@ def products_view(request):
 
     context = {
         'artworks': artworks,
-        'creators': creators,
-        'search_query': query
+        'search_query': query,
     }
     return render(request, 'products.html', context)
 

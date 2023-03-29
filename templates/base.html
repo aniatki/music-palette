@@ -113,13 +113,14 @@
                 </ul>
             </div>
         </div>
-        <!-- mobile navbar -->
+        <!-- navbar -->
         <div class="row">
             <nav class="navbar navbar-expand-lg w-100 d-flex">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
                     aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- large screen nav -->
                 <ul class="d-lg-none small-icons">
                     <li class="list-inline-item">
                         <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search"
@@ -146,21 +147,33 @@
                         </div>
                     </li>
                 </ul>
+                <!-- /large screen nav -->
+                <!-- mobile nav -->
                 <ul class="d-lg-none small-icons">
                     <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="" id="user-options-mobile" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
                                 <div><i class="fas fa-user fa-lg"></i></div>
-                                <p class="my-0">My Account</p>
+                                <p class="my-0">My account</p>
                             </div>
                         </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            <a href="#" class="dropdown-item">Register</a>
-                            <a href="#" class="dropdown-item">Login</a>
+                        <div class="dropdown-menu border-0" aria-labelledby="user-options-mobile">
+                            {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser%}
+                            <a href="" class="dropdown-item">Product Management</a>
+                            {% endif%}
+                            <a href="" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                            {% else %}
+                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                            {% endif %}
                         </div>
                     </li>
                 </ul>
+                <!-- /mobile nav -->
+
                 <ul class="d-lg-none small-icons">
                     <li class="list-inline-item">
                         <a class="text-primary font-weight-bold nav-link d-block d-lg-none" href="/bag/">
@@ -187,9 +200,9 @@
                                 All Products
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                                <a href="#" class="dropdown-item">By Publisher</a>
-                                <a href="#" class="dropdown-item">By Category</a>
-                                <a href="#" class="dropdown-item">All Products</a>
+                                <a href="{% url 'products' %}?released=False" class="dropdown-item">Unreleased</a>
+                                <a href="{% url 'products' %}?released=True" class="dropdown-item">Released</a>
+                                <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
                             </div>
                         </li>
                         <li class="nav-item">
