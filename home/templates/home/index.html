@@ -25,29 +25,31 @@
                 <h2>Check out our newest arrivals!</h2>
             </div>
             <div class="row">
-                {% for product in featured_products %}
+                {% for artwork in artworks %}
+                {% if artwork.is_featured and artwork.price is not None %}
                 <div class=" col-12 col-lg-4 ">
                     <div class="card mx-auto mb-5" style="width: 90%;">
-                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.alt_text }}">
+                        <img src="{{ artwork.image.url }}" class="card-img-top" alt="{{ artwork.description }}">
                         <div class="card-body">
-                            <p class="card-text fw-semibold">{{ product.name }}
-                                {% if product.is_featured %}
-                                    <span class="badge bg-secondary ms-3">New</span>
-                                {% endif %}
+                            <p class="card-text fw-semibold">{{ artwork.name }}
+                                <span class="badge bg-secondary ms-3">New</span>
                             </p>
-                            <p class="card-text fs-4 fw-semibold">&#8364; {{ product.price }}</p>
+                            <p class="card-text fs-4 fw-semibold">
+                                    &#8364; {{ artwork.price }}
+                            </p>
                             <div class="d-flex justify-content-between">
                                 <span class="text-secondary pt-1">
                                     <i class="fa-solid text-secondary fa-tags"></i>
                                     Cover Art
                                 </span>
                                 <span>
-                                    <a href="{% url 'add_to_cart' %}" class="btn btn-outline-primary">Buy now</a>
+                                    <a href="#" class="btn btn-outline-primary">Buy now</a>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
